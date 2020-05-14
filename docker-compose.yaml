@@ -1,0 +1,16 @@
+version: "3.5"
+services:
+  gitlab-runner-platform:
+    image: gitlab/gitlab-runner:alpine
+    restart: unless-stopped
+    volumes:
+      - ./config/platform:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - gitlab
+
+networks:
+  gitlab:
+    ipam:
+      config:
+        - subnet: 10.250.0.0/16

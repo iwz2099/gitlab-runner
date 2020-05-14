@@ -1,0 +1,32 @@
+concurrent = 1
+check_interval = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = ""
+  url = ""
+  token = ""
+  executor = ""
+  [runners.cache]
+
+[[runners]]
+  name = "gitlab-runner-platform"
+  url = "https://gitlab.test.cn/"
+  token = "sn8A231y3zfKoce31M1D"
+  executor = "docker"
+  [runners.custom_build_dir]
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
+  [runners.docker]
+    tls_verify = false
+    image = "harbor.test.cn/platform/ci-base:1.1.1"
+    dns = ["172.20.10.210"]
+    privileged = false
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+    disable_cache = false
+    volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]
+    shm_size = 0
